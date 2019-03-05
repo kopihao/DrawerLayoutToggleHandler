@@ -7,7 +7,7 @@ public class DrawerAutoLock extends CountDownTimer {
     private boolean isRunning = false;
 
     public DrawerAutoLock() {
-        super(2 * 1000, 1000);
+        this(2 * 1000, 1000);
     }
 
     public DrawerAutoLock(long millisInFuture, long countDownInterval) {
