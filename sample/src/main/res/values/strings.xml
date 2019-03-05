@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Drawer Layout Toggle Handler</string>
+    <string name="read_me">An attempt create a drawer layout which work well with its toggle/handle.</string>
+</resources>
