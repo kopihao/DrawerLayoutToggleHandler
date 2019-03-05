@@ -1,1 +1,2 @@
-include ':sample', ':drawer-layout-toggle-handler'
+include ':drawer-layout-toggle-handler'
+include ':sample' 
