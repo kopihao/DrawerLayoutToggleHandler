@@ -22,7 +22,7 @@ public class DrawerLayoutToggleHandler implements DrawerLayoutToggleListener, Dr
     private boolean hasAutoLock = true;
 
     public DrawerLayoutToggleHandler(Context context) {
-        this.context = context;
+        this(context, GravityCompat.END);
     }
 
     public DrawerLayoutToggleHandler(Context context, int drawerLayoutGravity) {
