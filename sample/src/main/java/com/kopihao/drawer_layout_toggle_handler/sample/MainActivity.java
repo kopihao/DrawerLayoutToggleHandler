@@ -1,4 +1,4 @@
-package com.kopihao.drawerLayoutToggleHandler.sample;
+package com.kopihao.drawer_layout_toggle_handler.sample;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,9 +7,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
-import com.kopihao.drawerLayoutToggleHandler.DrawerLayoutToggleHandler;
-import com.kopihao.drawerLayoutToggleHandler.DrawerLayoutToggleListener;
-import com.kopihao.drawerLayoutToggleHandler.R;
+import com.kopihao.drawer_layout_toggle_handler.DrawerLayoutToggleHandler;
+import com.kopihao.drawer_layout_toggle_handler.DrawerLayoutToggleListener;
+import com.kopihao.drawer_layout_toggle_handler.R;
 
 public class MainActivity extends AppCompatActivity {
 

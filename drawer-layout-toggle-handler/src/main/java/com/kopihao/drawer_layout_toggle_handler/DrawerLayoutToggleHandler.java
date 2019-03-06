@@ -1,4 +1,4 @@
-package com.kopihao.drawerLayoutToggleHandler;
+package com.kopihao.drawer_layout_toggle_handler;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,7 +11,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
-import com.kopihao.drawerLayoutToggleHandler.util.KopiTrace;
+import com.kopihao.drawer_layout_toggle_handler.util.KopiTrace;
 
 /**
  * A helpful handler to control {@link android.support.v4.widget.DrawerLayout} with toggle

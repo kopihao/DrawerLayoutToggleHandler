@@ -1,4 +1,4 @@
-package com.kopihao.drawerLayoutToggleHandler;
+package com.kopihao.drawer_layout_toggle_handler;
 
 import android.os.CountDownTimer;
 

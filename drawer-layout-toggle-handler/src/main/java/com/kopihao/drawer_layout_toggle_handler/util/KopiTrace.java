@@ -1,4 +1,4 @@
-package com.kopihao.drawerLayoutToggleHandler.util;
+package com.kopihao.drawer_layout_toggle_handler.util;
 
 import android.util.Log;
 
