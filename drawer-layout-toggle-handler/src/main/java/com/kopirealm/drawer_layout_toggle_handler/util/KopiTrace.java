@@ -1,8 +1,8 @@
-package com.kopihao.drawer_layout_toggle_handler.util;
+package com.kopirealm.drawer_layout_toggle_handler.util;
 
 import android.util.Log;
 
-import com.example.drawerLayoutToggleHandler.BuildConfig;
+import com.kopirealm.drawer_layout_toggle_handler.BuildConfig;
 
 public class KopiTrace {
 

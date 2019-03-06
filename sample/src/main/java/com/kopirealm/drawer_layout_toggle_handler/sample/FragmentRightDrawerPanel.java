@@ -1,4 +1,4 @@
-package com.kopihao.drawer_layout_toggle_handler.sample;
+package com.kopirealm.drawer_layout_toggle_handler.sample;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,9 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.kopihao.drawer_layout_toggle_handler.BaseFragmentDrawerPanel;
-import com.kopihao.drawer_layout_toggle_handler.DrawerLayoutToggleListener;
-import com.kopihao.drawer_layout_toggle_handler.R;
+import com.kopirealm.drawer_layout_toggle_handler.BaseFragmentDrawerPanel;
+import com.kopirealm.drawer_layout_toggle_handler.DrawerLayoutToggleListener;
+import com.kopirealm.drawer_layout_toggle_handler.R;
 
 public class FragmentRightDrawerPanel extends BaseFragmentDrawerPanel implements View.OnClickListener {
 
