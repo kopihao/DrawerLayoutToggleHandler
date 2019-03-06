@@ -5,6 +5,10 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
+/**
+ * Gesture detection used in {@link DrawerLayoutToggleHandler#drawerToggle}
+ * Detect mainly for single tap, double tap and long press event
+ */
 public class DrawerToggleDetector implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
 
     private GestureDetectorCompat gestureDetectorCompat;

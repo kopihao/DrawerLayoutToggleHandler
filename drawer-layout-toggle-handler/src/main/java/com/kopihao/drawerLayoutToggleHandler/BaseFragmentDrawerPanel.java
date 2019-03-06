@@ -3,6 +3,9 @@ package com.kopihao.drawerLayoutToggleHandler;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+/**
+ * Base fragment which will be hosted by drawer layout
+ */
 public class BaseFragmentDrawerPanel extends Fragment {
 
     private View drawerToggle;

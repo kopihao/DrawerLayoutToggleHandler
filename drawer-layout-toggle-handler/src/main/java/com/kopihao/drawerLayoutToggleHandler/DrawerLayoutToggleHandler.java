@@ -1,5 +1,6 @@
 package com.kopihao.drawerLayoutToggleHandler;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.view.GravityCompat;
@@ -10,6 +11,14 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
+/**
+ * A helpful handler to control {@link android.support.v4.widget.DrawerLayout} with toggle
+ * Toggle can be any {@link View}
+ * Enhanced toggle experience with {@link android.support.v4.view.GestureDetectorCompat} and {@link android.support.v4.widget.DrawerLayout.DrawerListener}
+ * Nothing fancy here but to ease setup and code lines required
+ *
+ * @refer {@link DrawerLayoutToggleHandler#initialize(BaseFragmentDrawerPanel, DrawerLayout, View, boolean)}
+ */
 public class DrawerLayoutToggleHandler implements DrawerLayoutToggleListener, DrawerLayout.DrawerListener, View.OnTouchListener {
 
     private Context context;
@@ -18,26 +27,45 @@ public class DrawerLayoutToggleHandler implements DrawerLayoutToggleListener, Dr
     private DrawerAutoLock drawerAutoLock;
     private DrawerToggleDetector drawerToggleDetector;
     private DrawerLayout drawerLayout;
-    private int drawerLayoutGravity = GravityCompat.END;
+    private int drawerLayoutGravity;
     private boolean hasAutoLock = true;
 
     public DrawerLayoutToggleHandler(Context context) {
         this(context, GravityCompat.END);
     }
 
+    /**
+     * @param context
+     * @param drawerLayoutGravity {@value GravityCompat#START} or {@value GravityCompat#END}
+     */
     public DrawerLayoutToggleHandler(Context context, int drawerLayoutGravity) {
         this.context = context;
         this.drawerLayoutGravity = drawerLayoutGravity;
     }
 
-    public void initialize(@NonNull BaseFragmentDrawerPanel drawerPanel, @NonNull DrawerLayout drawerLayout, @NonNull View drawerHandler) {
-        initialize(drawerPanel, drawerLayout, drawerHandler, false);
+    /**
+     * Essential setup
+     *
+     * @param drawerPanel
+     * @param drawerLayout
+     * @param drawerToggle
+     */
+    public void initialize(@NonNull BaseFragmentDrawerPanel drawerPanel, @NonNull DrawerLayout drawerLayout, @NonNull View drawerToggle) {
+        initialize(drawerPanel, drawerLayout, drawerToggle, false);
     }
 
-    public void initialize(@NonNull BaseFragmentDrawerPanel drawerPanel, @NonNull DrawerLayout drawerLayout, @NonNull View drawerHandler, boolean enableDrawerLayout) {
+    /**
+     * Essential setup
+     *
+     * @param drawerPanel
+     * @param drawerLayout
+     * @param drawerToggle
+     * @param enableDrawerLayout
+     */
+    public void initialize(@NonNull BaseFragmentDrawerPanel drawerPanel, @NonNull DrawerLayout drawerLayout, @NonNull View drawerToggle, boolean enableDrawerLayout) {
         this.drawerPanel = drawerPanel;
         this.drawerLayout = drawerLayout;
-        this.drawerToggle = drawerHandler;
+        this.drawerToggle = drawerToggle;
         this.drawerLayout.addDrawerListener(this);
         this.drawerToggle.setOnTouchListener(this);
         setupDrawerAutoLock();
@@ -45,11 +73,15 @@ public class DrawerLayoutToggleHandler implements DrawerLayoutToggleListener, Dr
         enableDrawerLayout(enableDrawerLayout);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public final boolean onTouch(View v, MotionEvent event) {
         return drawerToggleDetector.onTouchEvent(event);
     }
 
+    /**
+     * Setup timer to set drawer lock mode as {@value DrawerLayout#LOCK_MODE_UNLOCKED} after desired duration
+     */
     private void setupDrawerAutoLock() {
         drawerAutoLock = new DrawerAutoLock() {
             @Override
@@ -71,6 +103,9 @@ public class DrawerLayoutToggleHandler implements DrawerLayoutToggleListener, Dr
         };
     }
 
+    /**
+     * Setup gesture detection on {@link DrawerLayoutToggleHandler#drawerToggle}
+     */
     private void setupDrawerHandleDetector() {
         drawerToggleDetector = new DrawerToggleDetector(context) {
             @Override
@@ -96,14 +131,29 @@ public class DrawerLayoutToggleHandler implements DrawerLayoutToggleListener, Dr
         };
     }
 
+    /**
+     * Enabling Auto lock feature
+     * To lock drawer after unlocking drawer mode via {@link DrawerLayoutToggleHandler#drawerToggle}
+     *
+     * @param enable
+     * @see #onDrawerStateChanged(int)
+     */
     public void enableAutoLock(boolean enable) {
         this.hasAutoLock = enable;
     }
 
+    /**
+     * Check auto lock feature status
+     *
+     * @return true if enabled
+     */
     public boolean hasAutoLock() {
         return hasAutoLock;
     }
 
+    /**
+     * Expand/collapse drawer layout
+     */
     @Override
     public void toggleDrawerState() {
         final int gravity = drawerLayoutGravity;
@@ -114,6 +164,11 @@ public class DrawerLayoutToggleHandler implements DrawerLayoutToggleListener, Dr
         }
     }
 
+    /***
+     * Manipulate {@link DrawerLayout#setDrawerLockMode(int)}
+     *
+     * @param enable enabling swipe gesture to control drawer layout
+     */
     @Override
     public void enableDrawerLayout(boolean enable) {
         if (enable) {
@@ -123,6 +178,13 @@ public class DrawerLayoutToggleHandler implements DrawerLayoutToggleListener, Dr
         }
     }
 
+    /**
+     * Manipulating drawer swipe magnitude to define desire drawer behavior
+     * Eg. Expand the drawer if swipe more than toggle width
+     *
+     * @param drawerView
+     * @param slideOffset
+     */
     @Override
     public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
         if (slideOffset * drawerView.getWidth() >= drawerToggle.getWidth()) {
@@ -142,6 +204,11 @@ public class DrawerLayoutToggleHandler implements DrawerLayoutToggleListener, Dr
         KopiTrace.d("onDrawerClosed");
     }
 
+    /**
+     * Manipulating drawer state change to define desire drawer behavior
+     *
+     * @param newState
+     */
     @Override
     public void onDrawerStateChanged(int newState) {
         switch (newState) {
@@ -167,20 +234,36 @@ public class DrawerLayoutToggleHandler implements DrawerLayoutToggleListener, Dr
         }
     }
 
+    /**
+     * Control toggle visibility
+     */
     public void showDrawerHandler() {
         drawerToggle.setVisibility(View.VISIBLE);
         drawerPanel.hideDrawerToggle();
     }
 
+    /**
+     * Control toggle visibility
+     */
     public void hideDrawerHandler() {
         drawerToggle.setVisibility(View.INVISIBLE);
         drawerPanel.showDrawerToggle();
     }
 
+    /**
+     * Control drawer unlocking behavior
+     */
     public void unlockDrawerLayout() {
-        drawerToggle.startAnimation(getUnlockDrawerAnimation());
+        final Animation animation = getUnlockDrawerAnimation();
+        if (animation == null) return;
+        drawerToggle.startAnimation(animation);
     }
 
+    /**
+     * Provide drawer unlocking animation
+     *
+     * @return blinking twice animation
+     */
     public AlphaAnimation getUnlockDrawerAnimation() {
         final AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f, 0.3f);
         alphaAnimation.setDuration(450);
@@ -192,6 +275,11 @@ public class DrawerLayoutToggleHandler implements DrawerLayoutToggleListener, Dr
         return alphaAnimation;
     }
 
+    /**
+     * Define unlocking drawer animation callbacks
+     *
+     * @return animation listener
+     */
     public Animation.AnimationListener getUnlockDrawerAnimationListener() {
         return new Animation.AnimationListener() {
             @Override

@@ -2,6 +2,9 @@ package com.kopihao.drawerLayoutToggleHandler;
 
 import android.os.CountDownTimer;
 
+/**
+ * A timer to manipulate {@link android.support.v4.widget.DrawerLayout}
+ */
 public class DrawerAutoLock extends CountDownTimer {
 
     private boolean isRunning = false;
